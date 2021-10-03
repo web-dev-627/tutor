@@ -6,6 +6,8 @@ use App\Http\Controllers\ProcessController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LocalizationController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +18,6 @@ use App\Http\Controllers\DashboardController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/about', [HomeController::class, 'about']);
@@ -67,5 +68,5 @@ return redirect('/public/storage/$extra');
 }
 )->where('extra', '.*');
 
-
+Route::get('lang/{locale}', [LocalizationController::class, 'index']);
 Auth::routes();

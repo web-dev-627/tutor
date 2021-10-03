@@ -60,20 +60,40 @@
                             <ul class="topbar-contact">
                                 <li>
                                     <i class="flaticon flaticon-call"></i>
-                                    <a href="tel:+(111)256352">Call: +(111)256 352</a>
+                                    <a href="tel:+(111)256352">{{ __('Call') }}: +(111)256 352</a>
                                 </li>
                                 <li>
                                     <i class="flaticon flaticon-mail"></i>
-                                    <a href="mailto:support@rstheme.com">support@softcoders.net</a>
+                                    <a href="mailto:support@rstheme.com">{{ __('support') }}@softcoders.net</a>
                                 </li>
                             </ul>
                         </div>
-                        <div class="col-md-5 text-end">
+                        <div class="col-md-5 text-end d-flex justify-content-end align-items-center">
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" type="button" id="langdropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <?php 
+                                    $local_language = Session::get('locale'); 
+                                    $language_name = array_search($local_language, config('app.available_locales'));
+                                ?>
+                                {{$language_name}}
+                            </a>
+                            <ul class="langdropdown-menu dropdown-menu">
+                                <li class="dropdown-item">
+                                    <label> {{ __('Language') }}</label>
+                                    <select>
+                                        <?php $languages = config('app.available_locales');?>
+                                        @foreach ($languages as $fullname=>$shortname)
+                                            <option value="{{ $shortname}}" <?php echo($shortname == $local_language?'selected':'');?>>{{$fullname}}</option>
+                                        @endforeach
+                                    </slect>
+                                </li>
+                            </ul>
+                        </div>
                             @if (Auth::guest())
                                 <ul class="topbar-right">
                                     <li class="login-register">
                                         <i class="fa fa-sign-in"></i>
-                                        <a href="/login">Login</a> / <a href="/register">Register</a>
+                                        <a href="/login">{{ __('Login') }}</a> / <a href="/register">{{ __('Register') }}</a>
                                     </li>
                                 </ul>
                             @else
@@ -85,7 +105,7 @@
                                     <ul class="userdropdown-menu dropdown-menu" aria-labelledby="userdropdown">
                                         <li class="dropdown-item">
                                             <i class="fa fa-dashboard"></i>
-                                            <a href="/dashboard">Dashboard</a>
+                                            <a href="/dashboard">{{ __('Dashboard') }}</a>
                                         </li>
                                         <li class="dropdown-item">
                                             <i class="fa fa-sign-out"></i>
@@ -131,13 +151,13 @@
                                     </div>
                                     <nav class="sc-menu">
                                         <ul class="nav-menu">
-                                            <li class="menu-item-has-children current-menu-item"> <a href="/">Home</a>
+                                            <li class="menu-item-has-children current-menu-item"> <a href="/">{{ __('Home') }}</a>
                                             </li>
-                                            <li><a href="/about">About</a> </li>
+                                            <li><a href="/about">{{__('About')}}</a> </li>
 
 
                                             <li class="menu-item-has-children">
-                                                <a href="/home">Find Tutors</a>
+                                                <a href="/home">{{__('Find Tutors')}}</a>
                                             </li>
                                         </ul> <!-- //.nav-menu -->
                                     </nav>
